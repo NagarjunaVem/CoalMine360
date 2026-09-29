@@ -17,7 +17,19 @@ from data import (
     INITIAL_AUDIT_TRAIL,
 )
 
-DATA_FILE = os.path.join(os.path.dirname(__file__), "store.json")
+is_vercel = os.environ.get("VERCEL") is not None
+DEFAULT_STORE = os.path.join(os.path.dirname(__file__), "store.json")
+
+if is_vercel:
+    DATA_FILE = "/tmp/store.json"
+    if not os.path.exists(DATA_FILE) and os.path.exists(DEFAULT_STORE):
+        try:
+            import shutil
+            shutil.copyfile(DEFAULT_STORE, DATA_FILE)
+        except Exception:
+            pass
+else:
+    DATA_FILE = DEFAULT_STORE
 
 class Database:
     def __init__(self):
@@ -36,9 +48,10 @@ class Database:
         self.save()
 
     def load_or_reset(self):
-        if os.path.exists(DATA_FILE):
+        load_path = DATA_FILE if os.path.exists(DATA_FILE) else DEFAULT_STORE
+        if os.path.exists(load_path):
             try:
-                with open(DATA_FILE, "r", encoding="utf-8") as f:
+                with open(load_path, "r", encoding="utf-8") as f:
                     saved = json.load(f)
                     self.mines = saved.get("mines", copy.deepcopy(INITIAL_MINES))
                     self.ai_risks = saved.get("ai_risks", copy.deepcopy(INITIAL_AI_RISKS))
@@ -51,7 +64,7 @@ class Database:
                     self.audit_trail = saved.get("audit_trail", copy.deepcopy(INITIAL_AUDIT_TRAIL))
                     return
             except Exception as e:
-                print(f"Error loading store.json: {e}, resetting to default")
+                print(f"Error loading store data: {e}, resetting to default")
         self.reset()
 
     def save(self):
@@ -66,8 +79,12 @@ class Database:
             "alerts": self.alerts,
             "audit_trail": self.audit_trail,
         }
-        with open(DATA_FILE, "w", encoding="utf-8") as f:
-            json.dump(data, f, indent=2)
+        try:
+            with open(DATA_FILE, "w", encoding="utf-8") as f:
+                json.dump(data, f, indent=2)
+        except Exception:
+            # In-memory updates remain active even if filesystem is read-only
+            pass
 
     def get_dashboard_kpis(self):
         total_mines = len(self.mines)

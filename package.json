@@ -1,0 +1,10 @@
+{
+  "name": "coalmine360",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CoalMine360 — AI-Powered Smart Governance & Compliance Platform",
+  "scripts": {
+    "build": "cd frontend && npm install && npm run build",
+    "dev": "cd frontend && npm run dev"
+  }
+}
