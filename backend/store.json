@@ -8,8 +8,8 @@
       "status": "Operational",
       "compliance_rate": 72,
       "risk_level": "HIGH",
-      "risk_score": 89,
-      "open_issues": 12,
+      "risk_score": 91,
+      "open_issues": 13,
       "inspections_count": 18,
       "coordinates": {
         "lat": 23.7957,
@@ -330,6 +330,27 @@
   ],
   "violations": [
     {
+      "id": "viol-d36694",
+      "mine_id": "mine-1",
+      "mine_name": "Dhanbad North Mine",
+      "title": "Workers without required PPE at Sector 4 High-Wall",
+      "category": "Safety",
+      "detected_date": "30 Sep 2026",
+      "severity": "HIGH",
+      "observations_total": 1,
+      "critical_observations": 1,
+      "normal_observations": 0,
+      "evidence_files": [
+        "PPE_violation_pit3.jpg"
+      ],
+      "assigned_to": "Mine Safety Officer (R. K. Sharma)",
+      "corrective_action_title": "Corrective Action: Resolve Workers without required PPE at Sector 4 High-Wall",
+      "due_date": "02 Oct 2026",
+      "status": "OPEN",
+      "verification_status": "Pending Assignment",
+      "ai_flag": "AI Risk Score 99 (HIGH)"
+    },
+    {
       "id": "viol-a9b215",
       "mine_id": "mine-2",
       "mine_name": "Korba Central Mine",
@@ -458,6 +479,52 @@
     }
   ],
   "corrective_actions": [
+    {
+      "id": "ca-f4fe98",
+      "violation_id": "viol-d36694",
+      "mine_id": "mine-1",
+      "mine_name": "Dhanbad North Mine",
+      "title": "Corrective Action: Workers without required PPE at Sector 4 High-Wall",
+      "assigned_to": "Mine Safety Officer (R. K. Sharma)",
+      "assigned_date": "30 Sep 2026",
+      "due_date": "02 Oct 2026",
+      "status": "OPEN",
+      "severity": "HIGH",
+      "progress_percent": 10,
+      "lifecycle_steps": [
+        {
+          "step": "Observation Submitted",
+          "date": "30 Sep 2026, 10:01 PM",
+          "status": "COMPLETED",
+          "note": "Workers without required PPE at Sector 4 High-Wall captured via geo-tagged field form by Rajesh Kumar (Sr. DGMS Inspector)"
+        },
+        {
+          "step": "AI Risk Classification",
+          "date": "30 Sep 2026, 10:01 PM",
+          "status": "COMPLETED",
+          "note": "Risk Score: 99/100 (HIGH)"
+        },
+        {
+          "step": "Corrective Action Auto-Generated",
+          "date": "30 Sep 2026, 10:01 PM",
+          "status": "COMPLETED",
+          "note": "Assigned to Safety Officer with 5-day resolution SLA"
+        },
+        {
+          "step": "Action Implementation",
+          "date": "Pending",
+          "status": "PENDING",
+          "note": "Awaiting field supervisor sign-off"
+        },
+        {
+          "step": "Verification & Closure",
+          "date": "Pending",
+          "status": "PENDING",
+          "note": "Independent re-inspection mandatory before closeout"
+        }
+      ],
+      "notes": "Simulated GPS: 23.7957\u00b0 N, 86.4304\u00b0 E. Evidence verified."
+    },
     {
       "id": "ca-59fed0",
       "violation_id": "viol-a9b215",
@@ -788,6 +855,20 @@
   ],
   "alerts": [
     {
+      "id": "alert-2260c0",
+      "type": "CRITICAL",
+      "title": "New High-Severity Field Observation: Dhanbad North Mine",
+      "mine_id": "mine-1",
+      "mine_name": "Dhanbad North Mine",
+      "message": "Inspector Rajesh Kumar (Sr. DGMS Inspector) logged 'Workers without required PPE at Sector 4 High-Wall'. Corrective action required immediately.",
+      "escalation_chain": "Field Inspector \u2192 Mine Safety Officer \u2192 Mine Manager",
+      "current_escalation_level": "Mine Safety Officer",
+      "timestamp": "30 Sep 2026, 10:01 PM",
+      "acknowledged": false,
+      "status": "OPEN",
+      "action_taken": null
+    },
+    {
       "id": "alert-5ae3b3",
       "type": "CRITICAL",
       "title": "New High-Severity Field Observation: Korba Central Mine",
@@ -859,6 +940,60 @@
     }
   ],
   "audit_trail": [
+    {
+      "id": "audit-4e3459",
+      "timestamp": "30 Sep 2026, 10:03 PM",
+      "action": "Statutory document uploaded & OCR verified",
+      "entity": "Document SafeWorks_Form_O_Periodic_Medical_Batch.pdf",
+      "actor": "Compliance Registrar",
+      "details": "OCR extracted Certificate #SAF-2026-1823. Validity confirmed to 12 Aug 2027.",
+      "hash": "0x93e166d2...a045"
+    },
+    {
+      "id": "audit-c1049e",
+      "timestamp": "30 Sep 2026, 10:03 PM",
+      "action": "Statutory document uploaded & OCR verified",
+      "entity": "Document DGMS_Statutory_Safety_Certificate_2026.pdf",
+      "actor": "Compliance Registrar",
+      "details": "OCR extracted Certificate #SAF-2026-1823. Validity confirmed to 12 Aug 2027.",
+      "hash": "0x93e166d2...a045"
+    },
+    {
+      "id": "audit-7e62a2",
+      "timestamp": "30 Sep 2026, 10:01 PM",
+      "action": "Mine Manager notified",
+      "entity": "SMS / Digital Dispatch Gateway",
+      "actor": "Notification Dispatcher",
+      "details": "Automated notice dispatched to Dr. A. K. Banerjee (Dhanbad North Mine)",
+      "hash": "0x067b47e1...9722"
+    },
+    {
+      "id": "audit-9ed487",
+      "timestamp": "30 Sep 2026, 10:01 PM",
+      "action": "Corrective action assigned",
+      "entity": "Action #ca-f4fe98",
+      "actor": "Automated Governance Workflow",
+      "details": "Assigned to R. K. Sharma with due date 02 Oct 2026",
+      "hash": "0x82c435bc...d3f3"
+    },
+    {
+      "id": "audit-58dd62",
+      "timestamp": "30 Sep 2026, 10:01 PM",
+      "action": "AI risk classification generated",
+      "entity": "CoalMine360 AI Risk Engine",
+      "actor": "System AI Engine",
+      "details": "Calculated Risk Score: 99 (HIGH) | Model: v2.4 Multi-Factor",
+      "hash": "0xe0ea4ab1...3b70"
+    },
+    {
+      "id": "audit-7e27e3",
+      "timestamp": "30 Sep 2026, 10:01 PM",
+      "action": "Field observation submitted",
+      "entity": "Field Observation (Dhanbad North Mine)",
+      "actor": "Rajesh Kumar (Sr. DGMS Inspector) (Field Inspector)",
+      "details": "Geo-tagged: 23.7957\u00b0 N, 86.4304\u00b0 E | Category: Safety | Severity: HIGH",
+      "hash": "0x04f00fe0...d741"
+    },
     {
       "id": "audit-b6d616",
       "timestamp": "27 Sep 2026, 10:19 AM",
